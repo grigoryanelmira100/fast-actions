@@ -1,0 +1,133 @@
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("../assets/fonts/Inter-VariableFont_opsz,wght.ttf")
+    format("truetype");
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: "Inter", sans-serif;
+  }
+}
+
+@layer components {
+  @keyframes diagonal-shimmer {
+    0% {
+      transform: translate(-150%, -150%);
+      opacity: 0;
+    }
+    20% {
+      opacity: 1;
+    }
+    80% {
+      opacity: 1;
+    }
+    100% {
+      transform: translate(150%, 150%);
+      opacity: 0;
+    }
+  }
+
+  .button-shimmer {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .button-shimmer::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      transparent 20%,
+      rgba(255, 255, 255, 0.15) 35%,
+      rgba(255, 255, 255, 0.6) 48%,
+      rgba(255, 255, 255, 0.8) 50%,
+      rgba(255, 255, 255, 0.6) 52%,
+      rgba(255, 255, 255, 0.15) 65%,
+      transparent 80%
+    );
+    transform: translate(-150%, -150%);
+    pointer-events: none;
+    z-index: 1;
+    will-change: transform, opacity;
+  }
+
+  .button-shimmer:hover::before {
+    animation: diagonal-shimmer 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  .button-shimmer > span {
+    position: relative;
+    z-index: 2;
+  }
+}
+
+.swiper-wrapper {
+  padding-top: 10px !important;
+}
+
+@layer components {
+  @keyframes gradient-slide-diagonal {
+    0% {
+      background-position: 0% 0%;
+    }
+    100% {
+      background-position: 200% 200%;
+    }
+  }
+
+  .casino-card-border {
+    background: linear-gradient(
+      135deg,
+      #d00927 0%,
+      #ffffff 17%,
+      #df566b 25%,
+      #df566b 50%,
+      #ffffff 67%,
+      #ffffff 84%,
+      #ffffff 100%
+    );
+    background-size: 200% 200%;
+    background-position: 0% 0%;
+  }
+
+  .casino-card-border:hover {
+    animation: gradient-slide-diagonal 2s linear infinite;
+  }
+
+  .choose-card {
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+    position: relative;
+  }
+
+  .choose-card:hover {
+    transform: translateY(-6px);
+    box-shadow:
+      0 10px 30px rgba(208, 9, 39, 0.5),
+      0 0 20px rgba(208, 9, 39, 0.3);
+  }
+
+  .choose-card-icon {
+    transition: transform 0.3s ease;
+  }
+
+  .choose-card:hover .choose-card-icon {
+    transform: scale(1.1);
+  }
+
+  .home-below-fold > * {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 720px;
+  }
+}
